@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComponentesDeListagemColecao"
 include(":app")
+include(":funcaocomoparametro")
