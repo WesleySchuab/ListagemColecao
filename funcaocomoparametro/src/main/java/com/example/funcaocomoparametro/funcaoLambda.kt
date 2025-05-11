@@ -3,8 +3,8 @@ package com.example.funcaocomoparametro
 
 fun main() {
 // Funcao Lambda
-    val funcaoLambda = {
-        println("Executar")
+    val funcaoLambda = { nome : String ->
+        println("Executar ${nome}")
     }
-    funcaoLambda()
+    funcaoLambda("Wesley")
 }
