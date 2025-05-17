@@ -1,18 +1,35 @@
 package com.example.funcaocomoparametro
 
-class TomadaAntiga {
+class TomadaAntiga(val conector: Conector) {
     fun passarenergia() {
-        println(
-            "passando energia"
-        )
+        val qtdPinos = conector.quantidadePinos()
+        if (qtdPinos == 2){
+            conector.ligarAparelho()
+            println("Quantidade de pinos ${qtdPinos}")
+            println("passando energia")
+        }else{
+            println("Essa tomada só funciona com 2 pinos ${qtdPinos}")
+        }
+
+    }
+}
+interface  Conector{
+    fun quantidadePinos() : Int
+    fun ligarAparelho()
+
+}
+class ConectorNovoPadrao : Conector {
+
+    override fun quantidadePinos() : Int{
+        return 3
+    }
+   override fun ligarAparelho(){
+        println("aparelho ligado")
     }
 }
 
-class conectorNovoPadrao {
-
-}
-
 fun main() {
-    val tomadaAntiga = TomadaAntiga()
+    val conectorNovoPadrao = ConectorNovoPadrao()
+    val tomadaAntiga = TomadaAntiga(conectorNovoPadrao)
     tomadaAntiga.passarenergia()
 }
