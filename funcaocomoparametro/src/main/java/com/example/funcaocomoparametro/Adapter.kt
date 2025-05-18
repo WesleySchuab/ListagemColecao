@@ -8,7 +8,7 @@ class TomadaAntiga(val conector: Conector) {
             println("Quantidade de pinos ${qtdPinos}")
             println("passando energia")
         }else{
-            println("Essa tomada só funciona com 2 pinos ${qtdPinos}")
+            println("Essa tomada só funciona com 2 pinos voce passou ${qtdPinos}")
         }
 
     }
@@ -16,6 +16,17 @@ class TomadaAntiga(val conector: Conector) {
 interface  Conector{
     fun quantidadePinos() : Int
     fun ligarAparelho()
+
+}
+// Adaptador que implementa a interface Conector
+class ConectorAdaptador(val conectorNovoPadrao: ConectorNovoPadrao) : Conector {
+    override fun quantidadePinos(): Int {
+        return 2
+    }
+
+    override fun ligarAparelho() {
+        conectorNovoPadrao.ligarAparelho()
+    }
 
 }
 class ConectorNovoPadrao : Conector {
@@ -30,6 +41,10 @@ class ConectorNovoPadrao : Conector {
 
 fun main() {
     val conectorNovoPadrao = ConectorNovoPadrao()
-    val tomadaAntiga = TomadaAntiga(conectorNovoPadrao)
+    // Conector adaptador recebe um conector novo padrão de 3 pinos
+    val conectorAdaptador = ConectorAdaptador(conectorNovoPadrao)
+    // tomada antiga recebe um conector adaptador que funciona con 2 pinos
+    val tomadaAntiga = TomadaAntiga(conectorAdaptador)
+
     tomadaAntiga.passarenergia()
 }
